@@ -5,6 +5,7 @@ const itemSchema = new mongoose.Schema({
       type: String,
       required: [true, "Name is required"],
       unique: true,
+      trim: true
     },
     rating: {
       type: Number,
