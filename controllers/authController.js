@@ -1,7 +1,6 @@
 const multer = require('multer');
 const User = require('./../models/userModel');
 const jwt = require("jsonwebtoken");
-const Item = require('../models/itemModel');
 const bcrypt = require('bcryptjs');
 const req = require('express/lib/request');
 const res = require('express/lib/response');
@@ -136,3 +135,80 @@ exports.upload = async (req, res) =>{
         })
      }
 }
+
+// admin CRUD operations for users
+
+exports.getAllUsers = async (req, res) => {
+    try {
+      const users = await User.find();
+      res.status(200).json({
+        status: "success",
+        results: users.length,
+        data: {
+          users,
+        },
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
+  };
+
+  exports.getUser = async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      res.status(200).json({
+        status: "success",
+        data: {
+          user
+        }
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
+  };
+  
+
+  exports.removeUser = async (req, res) => {
+    try {
+      const user = await User.findByIdAndDelete(req.params.id);
+  
+      res.status(200).json({
+        status: "success",
+        data: {
+          user
+        },
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
+  };
+
+  exports.updateUser = async (req, res) => {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+      });
+  
+      res.status(200).json({
+        status: "success",
+        data: {
+            updatedUser,
+        },
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
+  };
+  
