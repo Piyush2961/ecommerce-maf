@@ -8,8 +8,7 @@ const router = express.Router();
 
 router.route('/').get(authController.getAllUsers)
 router.route('/:id').get(authController.getUser).delete(authController.removeUser).patch(authController.updateUser)
-
-router.post('/upload', authController.uploadUserPhoto, authController.upload);
+router.post('/upload', authController.uploadCloud)
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 
