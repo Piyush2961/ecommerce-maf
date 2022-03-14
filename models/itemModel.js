@@ -15,7 +15,7 @@ const itemSchema = new mongoose.Schema({
       type: Number,
       required: [true, "price is required"],
     },
-    count: Number,
+    brand: String,
     type: String,
     tag: String,
     img: String,
