@@ -17,7 +17,8 @@ const itemSchema = new mongoose.Schema({
     },
     count: Number,
     type: String,
-    tag: String
+    tag: String,
+    img: String,
   });
   
   const Item = mongoose.model("Item", itemSchema);
